@@ -39,7 +39,7 @@ if(isset($_POST['registro'])){
     }
 }
 
-/*session_start();
+session_start();
 
 if(isset($_SESSION['user'])){
     header("location:inicio.php");
@@ -68,7 +68,7 @@ if(isset($_POST['iniciar'])){
             echo "Usuario o contraseña incorrecto";
         }
     }
-}*/
+}
 ?>
 
 <!DOCTYPE html>
