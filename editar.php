@@ -19,13 +19,13 @@
 
 if(isset($_POST['user']) && !empty($_POST['user'])) {
     $u = $_POST['user'];
-    $p = $_POST['contraseña'];
+    $p = $_POST['password'];
     $n = $_POST['nombre'];
     $t = $_POST['tipo'];
 
-        $consulta = $pdo->prepare('UPDATE usuario SET usuario = :usuario, contraseña = :contraseña, nombre = :nombre, tipo = :tipo WHERE usuario = :actual_usuario');
+        $consulta = $pdo->prepare('UPDATE usuario SET usuario = :usuario, password = :password, nombre = :nombre, tipo = :tipo WHERE usuario = :actual_usuario');
         $consulta->bindParam(':usuario', $u);
-        $consulta->bindParam(':contraseña', $p);
+        $consulta->bindParam(':password', $p);
         $consulta->bindParam(':nombre', $n);
         $consulta->bindParam(':tipo', $t);
         $consulta->bindParam(':actual_usuario', $user);
@@ -56,7 +56,7 @@ if(isset($_POST['user']) && !empty($_POST['user'])) {
         Usuario <br>
         <input type="text" name="user" value="<?php echo $a['usuario']; ?>" required><br>
         Password <br>
-        <input type="password" name="contraseña" value="<?php echo $a['password']; ?>" required><br>
+        <input type="password" name="password" value="<?php echo $a['password']; ?>" required><br>
         Nombre <br>
         <input type="text" name="nombre" value="<?php echo $a['nombre']; ?>" required><br>
         <input type="hidden" name="tipo" value="<?php echo $a['tipo']; ?>">

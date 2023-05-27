@@ -1,20 +1,22 @@
 <?php
-    include_once 'conectar.php';
-    session_start();
+include_once 'conectar.php';
+session_start();
 
-    if(!isset($_SESSION['user'])){
-        header("location:index.php");
-    }
+if(!isset($_SESSION['user'])){
+    header("location:index.php");
+    exit;
+}
 
-    $user = $_SESSION['user'];
-    $consulta = $pdo->prepare('SELECT * FROM usuario WHERE usuario = :usuario');
-    $consulta->bindParam(':usuario', $user);
-    $consulta->execute();
-    $a = $consulta->fetch(PDO::FETCH_ASSOC);
+$user = $_SESSION['user'];
+$consulta = $pdo->prepare('SELECT * FROM usuario WHERE usuario = :usuario');
+$consulta->bindParam(':usuario', $user);
+$consulta->execute();
+$a = $consulta->fetch(PDO::FETCH_ASSOC);
 
-    if(isset($_REQUEST['cerrar'])){
+if(isset($_REQUEST['cerrar'])){
     session_destroy();
     header("location:index.php");
+    exit;
 }
 ?>
 
@@ -30,13 +32,16 @@
 <body>
 
 <?php 
+if(isset($a['nombre'])){
     echo "Bienvenido: ".$a['nombre'];
-    echo "<br>Tipo de usuario:" .$a['tipo']
+    echo "<br>Tipo de usuario: ".$a['tipo'];
+}
 ?>
 
 <br>
-<a href="inicio.php?cerrar=1">Cerrar sesion</a><br>
+<a href="inicio.php?cerrar=1">Cerrar sesión</a><br>
 <a href="editar.php">Editar perfil</a><br>
 
 </body>
 </html>
+
