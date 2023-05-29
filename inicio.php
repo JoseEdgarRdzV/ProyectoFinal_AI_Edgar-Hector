@@ -26,6 +26,7 @@ if (isset($_POST['cerrar'])) {
     <p>Bienvenido: <?php echo $_SESSION['user']; ?></p>
     <a href="editar.php">Editar perfil</a><br>
     <a href="agregar.php">Agregar clase</a><br>
+    <a href="unirse.php">Unirse a clase</a><br>
     <form action="inicio.php" method="post">
         <input type="submit" value="Cerrar sesión" name="cerrar">
     </form>

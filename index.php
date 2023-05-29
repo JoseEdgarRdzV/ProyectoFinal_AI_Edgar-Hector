@@ -6,29 +6,29 @@ error_reporting(E_ALL);
 include_once 'conectar.php';
 
 // Registro de usuario
-if(isset($_POST['registro'])){
+if (isset($_POST['registro'])) {
     $user = $_POST['user'];
     $password = $_POST['password'];
     $nombre = $_POST['nombre'];
     $tipo = $_POST['tipo'];
 
-    if(empty($user) || empty($password) || empty($nombre) || empty($tipo)){
+    if (empty($user) || empty($password) || empty($nombre) || empty($tipo)) {
         echo 'Los campos están vacíos';
     } else {
         $consulta = $pdo->prepare('SELECT * FROM alumnos WHERE usuario = :usuario');
         $consulta->bindParam(':usuario', $user);
         $consulta->execute();
 
-        if($consulta->rowCount() > 0) {
+        if ($consulta->rowCount() > 0) {
             echo 'El usuario ya existe';
         } else {
-            $insertar = $pdo->prepare('INSERT INTO alumnos (usuario, password, nombre, tipo) VALUES (:usuario, :password, :nombre, :tipo)');
+            $insertar = $pdo->prepare('INSERT INTO alumnos (alumno_id, usuario, password, nombre, tipo) VALUES (NULL, :usuario, :password, :nombre, :tipo)');
             $insertar->bindParam(':usuario', $user);
             $insertar->bindParam(':password', $password);
             $insertar->bindParam(':nombre', $nombre);
             $insertar->bindParam(':tipo', $tipo);
 
-            if ($insertar->execute()){
+            if ($insertar->execute()) {
                 echo '¡Felicidades, has sido registrado correctamente!';
                 header("Location: inicio.php");
                 exit;
@@ -41,16 +41,16 @@ if(isset($_POST['registro'])){
 
 session_start();
 
-if(isset($_SESSION['user'])){
+if (isset($_SESSION['user'])) {
     header("location:inicio.php");
     exit;
 }
 
-if(isset($_POST['iniciar'])){
+if (isset($_POST['iniciar'])) {
     $user = $_POST['u'];
     $password = $_POST['p'];
 
-    if(empty($user) || empty($password)){
+    if (empty($user) || empty($password)) {
         echo 'Los campos están vacíos';
     } else {
         $consulta = $pdo->prepare('SELECT * FROM alumnos WHERE usuario = :usuario AND password = :password');
@@ -60,7 +60,7 @@ if(isset($_POST['iniciar'])){
 
         $registrado = $consulta->rowCount();
 
-        if($registrado == 1){
+        if ($registrado == 1) {
             $_SESSION['user'] = $user;
             header("Location: inicio.php");
             exit;

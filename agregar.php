@@ -44,7 +44,7 @@ if (isset($_POST['agregar'])) {
 </head>
 <body>
     <h1>Agregar Clase</h1>
-    <form action="agregar_clase.php" method="post">
+    <form action="agregar.php" method="post">
         Nombre de la Clase: <br>
         <input type="text" name="nombre_clase" required><br>
         Descripción: <br>
